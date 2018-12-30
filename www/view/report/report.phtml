@@ -1,0 +1,312 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Reporte</h1>
+    </div>
+
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#opc-reg" aria-expanded="true" aria-controls="opc-reg">Busqueda Reporte <span data-feather="search"></span></button>
+    </p>
+
+    <div class="p-2">
+        <div class="col">
+            <div class="collapse multi-collapse show" id="opc-reg">
+                <div class="card card-body border-primary">
+                    <div class="row">
+                        <div class="col-md-12 order-md-1">
+                            <form class="needs-validation pb-2" novalidate>
+
+                                <h5>Busqueda de Sesion</h5>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nombres-reg">Nombre</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="nombres-reg" placeholder="" value="">
+                                            <button class="btn btn-info">
+                                                <span data-feather="search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="fecha-reg">Sesion</label>
+                                        <div  class="input-group">
+                                            <input type="text" class="form-control" id="sesion-reg" value="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mb-2">
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary btn-lg btn-block" type="submit">Cargar Reporte</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion">
+
+        <div class="card">
+
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <strong class="h3">Datos</strong>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-6">
+
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Datos Paciente</strong></li>
+
+                                <li class="list-group-item">Paciente: Pablo Los Palotes</li>
+                                <li class="list-group-item">Fecha de Sesion: 01/01/01</li>
+                                <li class="list-group-item">Doctor a Cargo: Pepe Vila</li>
+                                <li class="list-group-item"># de Sesion: 3</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Datos Generales</strong></li>
+
+                                <li class="list-group-item list-group-item-danger">Parametro de Simetria: 0.6</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+
+                        <div class="col-6">
+
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Pierna Izquierda</strong></li>
+
+                                <li class="list-group-item list-group-item-primary">Tiempo de extension rodilla: 1.2 seg</li>
+                                <li class="list-group-item list-group-item-primary">Tiempo de flexion rodilla: 0.6 seg</li>
+                                <li class="list-group-item list-group-item-primary">Tiempo de extension tobillo: 1.2 seg</li>
+                                <li class="list-group-item list-group-item-danger">Tiempo de flexion tobillo: 0.2 seg</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Pierna Derecha</strong></li>
+
+
+                                <li class="list-group-item list-group-item-primary">Tiempo de extension rodilla: 1.2 seg</li>
+                                <li class="list-group-item list-group-item-danger">Tiempo de flexion rodilla: 1.1 seg</li>
+                                <li class="list-group-item list-group-item-primary">Tiempo de extension tobillo: 1.2 seg</li>
+                                <li class="list-group-item list-group-item-primary">Tiempo de flexion tobillo: 0.6 seg</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link h1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <strong class="h3">Graficos</strong>
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+                        <label class="col-md-6" for="myChart2">Pierna Izquierda</label>
+                    </div>
+                    <div class="col-6 text-center">
+                        <canvas class="my-4" id="myChart2" width="900" height="380"></canvas>
+                        <label class="col-md-6" for="myChart">Pierna Derecha</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <canvas class="my-4" id="myChart3" width="900" height="380"></canvas>
+                        <label class="col-md-6" for="myChart3">Pierna Izquierda</label>
+                    </div>
+                    <div class="col-6 text-center">
+                        <canvas class="my-4" id="myChart4" width="900" height="380"></canvas>
+                        <label class="col-md-6" for="myChart4">Pierna Derecha</label>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+</main>
+</main>
+
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7],
+            datasets: [{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+    var ctx2 = document.getElementById("myChart2");
+    var myChart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7],
+            datasets: [{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#ff0014',
+                borderWidth: 4,
+                pointBackgroundColor: '#ff0014'
+            },{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#027bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+    var ctx3 = document.getElementById("myChart3");
+    var myChart3 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7],
+            datasets: [{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#ff0014',
+                borderWidth: 4,
+                pointBackgroundColor: '#ff0014'
+            },{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#027bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+    var ctx4 = document.getElementById("myChart4");
+    var myChart4 = new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5,6,7],
+            datasets: [{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#ff0014',
+                borderWidth: 4,
+                pointBackgroundColor: '#ff0014'
+            },{
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 10)-5),
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#027bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+</script>

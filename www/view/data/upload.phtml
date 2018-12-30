@@ -1,0 +1,279 @@
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Subir de Datos</h1>
+            </div>
+
+
+            <form method="post">
+
+                <h5>Info del Sensor</h5>
+
+                <div class="card p-3 border-primary">
+
+                    <div class="form-row">
+
+                        <div class="form-group col-lg-3">
+                            <label for="sensor-id">Seleccione el id del sensor:</label>
+                            <select class="form-control" id="sensor-id" name="sensor-id" onchange="sensorSesiones(this.value)">
+                                <option value="-1">Id del sensor</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-3">
+                            <label for="sensor-sesion">Seleccione sesion:</label>
+                            <select class="custom-select" id="sensor-sesion">
+                                <option selected>Sesion del sensor</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-3">
+                            <label for="tipo-pac">Seleccione tipo de paciente</label>
+                            <div class="btn-group btn-group-toggle" id="tipo-pac" data-toggle="buttons">
+                                <label class="btn btn-primary" onchange="formReg()">
+                                    <input type="radio" value="1" name="pac-reg" id="pac-reg" autocomplete="off"> Paciente Registrado
+                                </label>
+                                <label class="btn btn-primary" onchange="formNue()">
+                                    <input type="radio" value="2" name="pac-nue" id="pac-reg" autocomplete="off"> Paciente Nuevo
+                                </label>
+                            </div>
+                        </div>
+
+                </div>
+
+                </div>
+
+                <br>
+
+                <div id="paciente-info-reg" style="display: none">
+                    <h5>Informacion de Paciente Registrado</h5>
+
+                    <div class="card p-3 border-primary">
+
+                        <div class="form-row">
+
+                            <div class="form-group m-0 col-6">
+                                <label for="busca_pac"><strong>Busque el nombre del paciente</strong></label>
+                                <input type="text" class="form-control" name="busca_pac" id="busca_pac"
+                                       placeholder="Nombre Paciente" onkeyup="buscar_paciente(this.value)"
+                                       autocomplete="off">
+                                <select multiple class="form-control mt-0" id="pac_result"  size="0"
+                                        style="z-index: 3; position: absolute; display: none;">
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div id="paciente-info-nue" style="display: none">
+                    <h5>Informacion de Paciente Nuevo</h5>
+
+                    <div class="card p-3 border-primary">
+
+                        <div class="form-row">
+
+                            <div class="form-group col-3">
+                                <label for="rut">RUT</label>
+                                <input type="text" class="form-control" id="rut" placeholder="12.345.678-k" value="" >
+                                <div class="invalid-feedback">
+                                    Ingrese un rut valido
+                                </div>
+                            </div>
+
+                            <div class="form-group col-3">
+                                <label for="nacimiento">Fecha de Nacimiento</label>
+                                <input type="date" class="form-control" id="nacimiento" placeholder="" value="" >
+                                <div class="invalid-feedback">
+                                    Ingresar fecha de nacimiento
+                                </div>
+                            </div>
+
+                            <div class="form-group col-3">
+                                <label for="nombres">Nombres</label>
+                                <input type="text" class="form-control" id="nombres" placeholder="" value="">
+                                <div class="invalid-feedback">
+                                    Ingresar el campo Nombres
+                                </div>
+                            </div>
+
+                            <div class="form-group col-3">
+                                <label for="apellidos">Apellidos</label>
+                                <input type="text" class="form-control" id="apellidos" placeholder="" value="">
+                                <div class="invalid-feedback">
+                                    Ingresar el campo Apellidos
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <p id="prueba">
+
+                </p>
+
+
+
+                <br>
+
+                <button class="btn btn-primary" type="submit">Guardar Sesion<span data-feather="upload"></span></button>
+            </form>
+
+
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h5"><em>Previsualización</em></h1>
+          </div>
+
+          <div class="row">
+            <div class="col-6 text-center">
+              <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+              <label class="col-md-6" for="myChart2">Pierna Izquierda</label>
+            </div>
+            <div class="col-6 text-center">
+              <canvas class="my-4" id="myChart2" width="900" height="380"></canvas>
+              <label class="col-md-6" for="myChart">Pierna Derecha</label>
+            </div>
+          </div>
+
+
+
+        </main>
+
+        <script>
+            $( document ).ready(function() {
+
+                $.get("index.php",{route: 'data/ajax/upload',fun: 'id_sensor'}, function(data){
+
+                    var datajson = JSON.parse(data);
+                    var outHTML = '<option value="-1">Id del sensor</option>';
+
+
+                    let j=0;
+                    var x = Array.from(Array(Object.keys(datajson).length), ()=>j++);
+
+                    for (var i in x){
+
+                        outHTML = outHTML + '<option value="'+  datajson[i].sensor_id +'">' + datajson[i].name + '</option>';
+
+                    }
+
+                    $("#sensor-id").html(outHTML);
+
+                });
+
+
+
+            });
+
+            $( document ).on('load',function() {
+
+                var w = $("#busca_pac").width();
+
+                $('#pac_result').width(w);
+
+
+            });
+
+            function formNue() {
+
+                $('#paciente-info-reg').hide();
+
+                $('#paciente-info-nue').show("slow");
+                $("#pac_result").hide();
+
+            }
+
+            function formReg() {
+
+                $('#paciente-info-nue').hide();
+
+                $('#paciente-info-reg').show("slow");
+                $("#pac_result").hide();
+
+            }
+
+
+            function sensorSesiones(n) {
+
+                var outHTML = '<option value="-1">Sesion del sensor</option>';
+
+
+
+                for (var i in [1,2,3]){
+
+                    outHTML = outHTML + '<option value="'+  i +'">' + n + '-' + i + '</option>';
+
+                }
+
+                $("#sensor-sesion").html(outHTML);
+
+            }
+            
+            function buscar_paciente(nombre) {
+
+                if (nombre.length < 2) {
+                    $("#pac_result").hide();
+                    $("#pac_result").html('');
+                    $("#pac_result").attr('size',0);
+
+                }
+                else if(nombre.length >= 2){
+                    $.get("index.php",{route: 'data/ajax/upload',fun: 'buscar_paciente',nombre: nombre}, function(data){
+
+                        if(data!='[]'){
+
+
+                            var datajson = JSON.parse(data);
+
+                            var html_result= "";
+
+
+                            let j = 0;
+                            var x = Array.from(Array(Math.min(Object.keys(datajson).length,5)), ()=>j++);
+
+                            for(var i in x) {
+
+                                var nombreCompleto =  datajson[i].firstname + ' ' + datajson[i].first_lastname + ' ' + datajson[i].secound_lastname;
+
+                                html_result = html_result + '<option class="pt-1 pb-1"' +
+                                    ' onclick="pacienteElegido(' + "'" +nombreCompleto + "'" + ')">' +
+                                    nombreCompleto + '</option>';
+                            }
+
+
+                            $("#pac_result").html(html_result);
+                            $("#pac_result").attr('size',parseInt(i)+1);
+                            $("#pac_result").show();
+                        }
+                        else{
+
+                            $("#pac_result").html('<a class="list-group-item list-group-item-action rounded-0">'+
+                                '<strong>Ningun Paciente Encontrado</strong></a>');
+                            $("#pac_result").attr('size',0);
+                            $("#pac_result").show();
+
+                        }
+                    });
+
+                }
+
+            }
+
+            function pacienteElegido(nombreCompleto) {
+
+                $( document ).ready(function() {
+
+                    $("input[name='busca_pac']").val(nombreCompleto);
+
+                    $("#pac_result").html('');
+                    $("#pac_result").hide();
+                    $("#pac_result").attr('size',1);
+
+                });
+            }
+        </script>
